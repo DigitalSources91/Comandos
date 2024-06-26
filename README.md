@@ -7,7 +7,7 @@ La importancia de conocer la línea de comandos hoy en día, puede marcarle dife
 Nota: Los siguientes 15 grupos de comandos son facilitados para la comunidad con proposito de laboratorio y estudio,
 Ejecutar con discresion y sin afectar la seguridad e integridad de ningun individuo, para propositos no eticos.
 
-==================================================================================
+
 1) **comando execute**
 
 control
@@ -31,8 +31,6 @@ excel.exe
 outlook.exe
 powerpnt.exe
 
---------------------------------------------------
-==================================================
 --------------------------------------------------
 
 2) **//--Obtener informacion del CPU en PowerShell--//**
@@ -71,8 +69,6 @@ wmic path softwarelicensingservice get OA3xOriginalProductKey
 wmic printer list brief,serialNumber
 
 --------------------------------------------------
-==================================================
---------------------------------------------------
 
 3) **//--Obtener lista de impresoras desde CMD--//**
 
@@ -95,8 +91,6 @@ printui.exe /s /t2
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print" /v RpcAuthnLevelPrivacyEnabled /t REG_DWORD /d 0 /f 
 
 --------------------------------------------------
-==================================================
---------------------------------------------------
 
 4) **//--Realizar punto de restauracion en CMD--//**
 
@@ -106,8 +100,6 @@ wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "R
 
 rstrui.exe
 
---------------------------------------------------
-==================================================
 --------------------------------------------------
 
 5) **//--Variables de entorno--//**
@@ -119,8 +111,6 @@ set (muestra variables de entorno)
 setx TMP "%USERPROFILE%\AppData\Local\Temp"
 setx TEMP "%USERPROFILE%\AppData\Local\Temp"
 
---------------------------------------------------
-==================================================
 --------------------------------------------------
 
 6) **//--Listar Procesos/Tareas--//**
@@ -142,8 +132,6 @@ taskkill /PID #### /F
 taskkill /im winword.exe /f
 
 ---------------------------------------------------------------------------------------
-=======================================================================================
----------------------------------------------------------------------------------------
 
 7) **//--Buscar archivos <nombre>.<formato> en unidad C:/--//**
 
@@ -163,15 +151,11 @@ xcopy ".\*.pst" "z:" /F /S
 net use z: /delete
 
 ---------------------------------------------------------------------------------------
-=======================================================================================
----------------------------------------------------------------------------------------
 
 8) **//--Conexione SSH <IP-LAN>--//**
 
 ssh administrador@192.168.0.1-254
 
---------------------------------------------------
-==================================================
 --------------------------------------------------
 
 9) **//--Establecer conexion por consola--//**
@@ -180,8 +164,6 @@ ssh administrador@192.168.0.1-254
 
 & C:\pstools\psexec.exe \\192.168.0.xxx -u administrador -p <contraeña> -s powershell.exe
 
---------------------------------------------------
-==================================================
 --------------------------------------------------
 
 10) **//--Habilitar acceso remoto a un equipo--//**
@@ -200,8 +182,6 @@ netsh advfirewall set allprofiles state off
 
 net use \\127.0.0.1\Admin$ /user:administrador <Contraseña>
 
----------------------------------------------------------------------------------------
-=======================================================================================
 ---------------------------------------------------------------------------------------
 
 11) **//--Administrar servicios por consola--//**
@@ -251,15 +231,11 @@ powershell -command " Set-Service -Name Spooler -StartupType Automatic -Status R
 
 
 ---------------------------------------------------------------------------------------
-=======================================================================================
----------------------------------------------------------------------------------------
 
 12) **//--Exportar Servicios a CSV--//**
 
 Get-WmiObject Win32_service | select Name, DisplayName, State, PathName | export-csv -path "%USERPROFILE%\Documents\services.csv"
 
---------------------------------------------------
-==================================================
 --------------------------------------------------
 
 13) **//--habilitar comandos de Linux en PowerShell--//**
@@ -270,8 +246,6 @@ DISM.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 DISM.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 
---------------------------------------------------
-==================================================
 --------------------------------------------------
 
 14) **//--En caso de error de Windows Update--//**
@@ -296,8 +270,6 @@ net start bits
 
 net start msiserver
 
---------------------------------------------------
-==================================================
 --------------------------------------------------
 
 15) **//--Recuperar instancias de driver si el S.O. Prsenta Fallas--//**
