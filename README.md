@@ -33,13 +33,13 @@ powerpnt.exe
 
 --------------------------------------------------
 
-2) **//--Obtener informacion del CPU en PowerShell--//**
+2) **Información del equipo**
+
+//--Obtener informacion del CPU en PowerShell--//
 
 wmic cpu get caption,deviceid,name,numberofcores,maxclockspeed,status
 
 *//--Obtener informacion del mainboard en PowerShell--//*
-
-Get-WmiObject win32_baseboard | Format-List Product,Manufacturer,SerialNumber,Version,Model,Name
 
 wmic baseboard get product,Manufacturer,version,serialnumber,model,name
 
@@ -70,7 +70,9 @@ wmic printer list brief,serialNumber
 
 --------------------------------------------------
 
-3) **//--Obtener lista de impresoras desde CMD--//**
+3) **Impresoras**
+
+//--Obtener lista de impresoras desde CMD--//
 
 powershell -command " Get-printer | Format-Table "
 
@@ -92,7 +94,9 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print" /v RpcAuthnL
 
 --------------------------------------------------
 
-4) **//--Realizar punto de restauracion en CMD--//**
+4) **Punto de restauración**
+
+//--Realizar punto de restauracion en CMD--//
 
 wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Restore-Point", 100, 7
 
@@ -102,7 +106,9 @@ rstrui.exe
 
 --------------------------------------------------
 
-5) **//--Variables de entorno--//**
+5) **Variables de entorno**
+
+//--Mostrar Variables de entorno--//
 
 set (muestra variables de entorno)
 
@@ -113,7 +119,9 @@ setx TEMP "%USERPROFILE%\AppData\Local\Temp"
 
 --------------------------------------------------
 
-6) **//--Listar Procesos/Tareas--//**
+6) **Procesos**
+
+//--Listar Procesos/Tareas--//
 
 tasklist
 
@@ -133,9 +141,11 @@ taskkill /im winword.exe /f
 
 ---------------------------------------------------------------------------------------
 
-7) **//--Buscar archivos <nombre>.<formato> en unidad C:/--//**
+7) **Busqueda de archivos**
 
-C:
+//--Buscar archivos <nombre>.<formato> en unidad--//
+
+C: (Cambia la ubicación a la ruta raiz de la unidad C)
 dir /b/s *.pst
 dir /b/s <nombre>.pdf
 
@@ -143,30 +153,37 @@ dir /b/s <nombre>.pdf
 
 net use z: \\192.168.0.1-254\InfoEquipo <Contraseña> /user:192.168.0.1-254\administrador /PERSISTENT:YES
 
-
 *//--Enviar a destino rtemoto--//*
 
 xcopy ".\*.pst" "z:" /F /S
+
+*//--Eliminar unidad asignada a destino rtemoto--//*
 
 net use z: /delete
 
 ---------------------------------------------------------------------------------------
 
-8) **//--Conexione SSH <IP-LAN>--//**
+8) **SSH**
+
+//--Conexione SSH <IP-LAN>--//
 
 ssh administrador@192.168.0.1-254
 
 --------------------------------------------------
 
-9) **//--Establecer conexion por consola--//**
+9) **PStools**
 
-& C:\pstools\psexec.exe \\192.168.0.xxx -u administrador -p <contraeña> -s cmd.exe
+//--Establecer conexion por consola--//
 
-& C:\pstools\psexec.exe \\192.168.0.xxx -u administrador -p <contraeña> -s powershell.exe
+& C:\pstools\psexec.exe \\192.168.0.xxx -u <usuario> -p <contraeña> -s cmd.exe
+
+& C:\pstools\psexec.exe \\192.168.0.xxx -u <usuario> -p <contraeña> -s powershell.exe
 
 --------------------------------------------------
 
-10) **//--Habilitar acceso remoto a un equipo--//**
+10) **;itigar errores de conexión en PStools**
+
+//--Habilitar acceso remoto por consola a un equipo--//
 
 sc config RemoteRegistry start= auto
 
@@ -184,7 +201,7 @@ net use \\127.0.0.1\Admin$ /user:administrador <Contraseña>
 
 ---------------------------------------------------------------------------------------
 
-11) **//--Administrar servicios por consola--//**
+11) **Administrar servicios por consola**
 
 
 =====/**/WINDOWS UPDATE SERVICE/**/=======
@@ -232,13 +249,13 @@ powershell -command " Set-Service -Name Spooler -StartupType Automatic -Status R
 
 ---------------------------------------------------------------------------------------
 
-12) **//--Exportar Servicios a CSV--//**
+12) **Exportar Servicios a archivo  CSV**
 
 Get-WmiObject Win32_service | select Name, DisplayName, State, PathName | export-csv -path "%USERPROFILE%\Documents\services.csv"
 
 --------------------------------------------------
 
-13) **//--habilitar comandos de Linux en PowerShell--//**
+13) **Habilitar comandos de Linux en PowerShell**
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
@@ -248,7 +265,7 @@ DISM.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 
 --------------------------------------------------
 
-14) **//--En caso de error de Windows Update--//**
+14) **En caso de error de Windows Update**
 
 net stop wuauserv
 
@@ -272,7 +289,15 @@ net start msiserver
 
 --------------------------------------------------
 
-15) **//--Recuperar instancias de driver si el S.O. Prsenta Fallas--//**
+15) **Recuperar desctores dañados del disco**
+
+*//--Escaneo y repación de sectores dañados--//*
+
+chkdsk /f /s /x
+
+sfc /scannow
+
+*//--Recuperar instancias de driver si el S.O. Prsenta Fallas--//*
 
 DISM.exe /Online /Cleanup-image /CheckHealth
 
